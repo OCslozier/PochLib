@@ -54,8 +54,7 @@ function searchAPI(title, author) {
     const maxResults = 20;
 
     // Constitution de l'URL pour requêter l'API
-    const apiKey = 'AIzaSyAl3MDo2LvIg5jHu-PTchhELZKbnXhPlnU';
-    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(`intitle:${title}+inauthor:${author}`)}&startIndex=${startIndex}&maxResults=${maxResults}&key=${apiKey}`;
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(`intitle:${title}+inauthor:${author}`)}&startIndex=${startIndex}&maxResults=${maxResults}`;
 
     // Requête réseau
     fetch(apiUrl)
