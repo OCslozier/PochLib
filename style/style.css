@@ -8,6 +8,17 @@ body {
   display: none;
 }
 
+.error {
+  color: #f02b01;
+  font-style: italic;
+}
+
+.success {
+  color: #1AAB19;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
 .title {
   font-size: 30px;
   font-weight: 100;
