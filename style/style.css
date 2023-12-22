@@ -1,3 +1,154 @@
+body {
+  font-family: "Roboto", sans-serif;
+  padding-top: 10px;
+  margin: 30px;
+}
+
 .hide {
   display: none;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 100;
+  text-align: center;
+  color: #4A4A4A;
+  background-color: #eff0f4;
+  border: 1px solid #e8e8e7;
+  border-bottom: 3px solid #cfcfcf;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 20px;
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  color: #c8c8c8;
+}
+
+.button-container {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.button-container_2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  width: 110px;
+  border-radius: 5px;
+}
+button.button-green {
+  background-color: #469388;
+  margin-right: 5px;
+  color: #fff;
+}
+button.button-green:hover {
+  background-color: #318b7d;
+}
+button.button-red {
+  background-color: #df5a4b;
+  margin-left: 5px;
+  color: #fff;
+}
+button.button-red:hover {
+  background-color: #973025;
+}
+
+form {
+  margin: auto;
+  width: 100%;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid black;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media all and (min-width: 751px) and (max-width: 1999px) {
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    width: 150px;
+  }
+  button.button-green {
+    margin-right: 0;
+  }
+  button.button-red {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  .button-container_2 {
+    display: flex;
+    flex-direction: column;
+    align-items: unset;
+  }
+}
+@media all and (min-width: 2000px) {
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    width: 150px;
+  }
+  button.button-green {
+    margin-right: 0;
+  }
+  button.button-red {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  .button-container_2 {
+    display: flex;
+    flex-direction: column;
+    align-items: unset;
+  }
+}
+.separator-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.line {
+  height: 0.5px;
+  width: 100%;
+  background-color: #000;
+}
+
+.left-line {
+  margin-right: 10px;
+}
+
+.right-line {
+  margin-left: 10px;
+}
+
+.center-content {
+  margin: 0 20px;
+}
+.center-content img {
+  width: 40px;
+  height: auto;
+  padding: 10px;
 }/*# sourceMappingURL=style.css.map */

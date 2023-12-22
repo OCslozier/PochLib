@@ -1,10 +1,3 @@
-function displayTitle() {
-    let titleNew = `<img src="img/logo_min.png" alt="Logo">Poch'Lib<img src="img/logo_min.png" alt="Logo">`;
-    let h1Element = document.querySelector('.title');
-    h1Element.innerHTML = '';
-    h1Element.innerHTML = titleNew;
-}
-
 function displayAddButton() {
     let hideButton = `
         <div id="hideButton" class="button-container">
@@ -37,6 +30,22 @@ function displayForm() {
     formElement.insertAdjacentHTML('afterend', form);
 }
 
+function newSeparator() {
+    let newSeparator = `
+    <div id="separator" class="separator-container">
+		<div class="line left-line"></div>
+		<div class="center-content">
+		  <img src="img/logo_min.png" alt="Image centrée">
+		</div>
+		<div class="line right-line"></div>
+	  </div>    
+    `
+    let sepElement = document.querySelector('html div#myBooks hr');
+    sepElement.insertAdjacentHTML('afterend', newSeparator);
+    sepElement.remove()
+
+}
+
 function HideAndDisplay() {
     let hideButton = document.getElementById("addBouton");
     hideButton.addEventListener("click", function () {
@@ -46,8 +55,7 @@ function HideAndDisplay() {
     });
 }
 
-
-displayTitle();
 displayAddButton();
 displayForm();
+newSeparator()
 HideAndDisplay();
