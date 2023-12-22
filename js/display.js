@@ -17,7 +17,7 @@ function displayAddButton() {
 
 function displayForm() {
     let form = `
-        <div id="search" class="search">
+        <div id="search" class="hide">
             <form id="searchForm">
                 <label for="title">Titre du livre:</label>
                 <input type="text" id="title" placeholder="Ex. : Le rouge et le noir">
@@ -37,6 +37,17 @@ function displayForm() {
     formElement.insertAdjacentHTML('afterend', form);
 }
 
+function HideAndDisplay() {
+    let hideButton = document.getElementById("addBouton");
+    hideButton.addEventListener("click", function () {
+        let hideForm = document.getElementById("search");
+        hideForm.setAttribute("class", "form");
+        hideButton.setAttribute("class", "hide");
+    });
+}
+
+
 displayTitle();
 displayAddButton();
 displayForm();
+HideAndDisplay();
