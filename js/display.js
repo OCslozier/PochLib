@@ -59,3 +59,65 @@ displayAddButton();
 displayForm();
 newSeparator()
 HideAndDisplay();
+sessionStorageDisplay();
+
+// Recherche et affichage des éléments présents dans sessionStorage
+function sessionStorageDisplay() {
+    if (sessionStorage.length > 0) {
+        // Parcourir les clés du sessionStorage
+        let hrElementStorageResult = document.getElementById("pochlist");
+        let hrStorageDiv = document.getElementById("hrStorageResults");
+        let h2ElementStorageResult = document.getElementById("hrStorageResults");
+        let storageDiv = document.getElementById("storageResults");
+
+        if (!hrStorageDiv) {
+            hrElementStorageResult = document.getElementById("pochlist");
+            let hrStorageDiv = document.createElement("hr");
+            hrStorageDiv.id = "hrStorageResults";
+            hrElementStorageResult.parentNode.insertBefore(hrStorageDiv, hrElementStorageResult.nextSibling);
+        }
+
+        if (storageDiv) {
+            storageDiv.innerHTML = '';
+        } else {
+            h2ElementStorageResult = document.getElementById("hrStorageResults");
+            storageDiv = document.createElement("div");
+            storageDiv.className = "bookResults";
+            storageDiv.id = "storageResults";
+            h2ElementStorageResult.parentNode.insertBefore(storageDiv, h2ElementStorageResult.nextSibling);
+        }
+
+        for (let i = 0; i < sessionStorage.length; i++) {
+            const key = sessionStorage.key(i);
+
+            // J'exclue les clés qui ne commencent pas par "APIGB"
+            if (key.startsWith("APIGB")) {
+                const storedValue = sessionStorage.getItem(key);
+
+                try {
+                    const decodedValue = JSON.parse(storedValue);
+                    const displayStorage = document.getElementById("storageResults");
+                    const storageElement = document.createElement('div');
+                    storageElement.classList.add('bookbox');
+                    storageElement.innerHTML = `
+                        <div>
+                            <i class="fa-solid fa-trash eraseBook" id="eraseBook_${decodedValue.id}" data-bookid="${decodedValue.id}"></i>
+                        </div>
+                        <p class="booktitle">Titre : ${decodedValue.title}</p>
+                        <p class="bookid">Id : ${decodedValue.id}</p>
+                        <p class="bookauthor">Auteur: ${decodedValue.firstAuthor}</p>
+                        <p class="bookdescription">Description : ${decodedValue.shortDescription}</p>
+                        <div class="bookcover">     
+                            <img src="${decodedValue.thumbnailUrl}" alt="Thumbnail">
+                        </div>
+                    `;
+                    displayStorage.appendChild(storageElement);
+                } catch (error) {
+                    console.error(`Erreur lors du décodage JSON pour la clé ${key}: ${error.message}`);
+                }
+            }
+        }
+    } else {
+        console.log("Le sessionStorage est vide.");
+    }
+}

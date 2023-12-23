@@ -102,35 +102,36 @@ function displayResults(books) {
 
             // Manipulation de la chaîne de caractères "description" pour la mettre en forme et la tronquer
             const formattedDescription = formatText(description);
-            shortdescription = truncateText(formattedDescription, 200);
+            shortDescription = truncateText(formattedDescription, 200);
 
             // Préparation de l'alerte de succès
             const successMessage = document.getElementById('alert');
             successMessage.setAttribute("class", "success");
             successMessage.textContent = "RESULTATS DE RECHERCHE : " + numberOfBooks + " livres correspondent à votre recherche";
 
-            const encodedTitle = encodeURIComponent(title);
-            const encodedFirstAuthor = encodeURIComponent(firstAuthor);
-            const encodedShortDescription = encodeURIComponent(shortdescription);
-            const encodedThumbnailUrl = encodeURIComponent(thumbnailUrl);
-
             // Création de l'affichage de toutes les occurrences de résultat
             const articleElement = document.createElement('div');
             articleElement.classList.add('bookbox');
             articleElement.innerHTML = `
                 <div>
-                <i class="fa-regular fa-bookmark" id="${id}" onclick="saveBook('${id}', '${encodedTitle}', '${encodedFirstAuthor}', '${encodedShortDescription}', '${encodedThumbnailUrl}')"></i>
+                    <i class= "fa-regular fa-bookmark listensavebook" id="${id}"></i>
                 </div>
                 <p class="booktitle">Titre : ${title}</p>
                 <p class="bookid">Id : ${id}</p>
                 <p class="bookauthor">Auteur: ${firstAuthor}</p>
-                <p class="bookdescription">Description : ${shortdescription}</p>
+                <p class="bookdescription">Description : ${shortDescription}</p>
                 <div class="bookcover">     
                     <img src="${thumbnailUrl}" alt="Thumbnail">
                 </div>
                 <p class="error" id="alert_${id}"></p>
             `;
             resultsDiv.appendChild(articleElement);
+
+            // Ajout d'un auditeur d'événements au clic sur l'icône
+            const iconElement = articleElement.querySelector('.listensavebook');
+            iconElement.addEventListener('click', function () {
+                saveBook(id, title, firstAuthor, shortDescription, thumbnailUrl);
+            });
 
             // Définition de l'icône favori
             const storedBookJSON = sessionStorage.getItem("APIGB" + id);
@@ -149,14 +150,49 @@ function displayResults(books) {
 
 
 function cancelSearch() {
-    // Annulation de la recherche
-    document.addEventListener("DOMContentLoaded", function () {
+// Annulation de la recherche
+document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("cancel").onclick = function () {
-            window.location.reload();
-        };
-    });
+            window.location.reload();     
+    }   
+});
 }
 
-cancelSearch();
+cancelSearch()
 
+function saveBook(id, title, firstAuthor, shortDescription, thumbnailUrl) {
+    // Vérifier si le livre est déjà enregistré dans sessionStorage
+    const storedBookJSON = sessionStorage.getItem("APIGB" + id);
 
+    if (storedBookJSON) {
+        // Le livre est déjà dans sessionStorage, on affiche une alerte
+        const errorStorageMessage = document.getElementById('alert_' + id);
+        errorStorageMessage.textContent = "Ce livre est déjà dans votre Poch List";
+
+        // On attend 5 secondes puis on retire l'alerte
+        setTimeout(function () {
+            errorStorageMessage.textContent = "";
+        }, 5000);
+    } else {
+        // Création de l'objet qui représente le livre
+        const bookInfo = {
+            id,
+            title,
+            firstAuthor,
+            shortDescription,
+            thumbnailUrl,
+        };
+
+        // Je convertis l'objet en chaîne JSON
+        const bookInfoJSON = JSON.stringify(bookInfo);
+
+        // Stockage du livre et de ces infos en sessionStorage (clé = ("APIGB"+id), les infos en Json)
+        sessionStorage.setItem("APIGB" + id, bookInfoJSON);
+
+        // Je modifie l'icône favori de mon élément pour indiquer que le livre est enregistré
+        const changeIcon = document.getElementById(id);
+        changeIcon.setAttribute("class", "fa-solid fa-bookmark");
+
+        sessionStorageDisplay();
+    }
+}
