@@ -49,7 +49,7 @@ function formSubmit() {
 formSubmit();
 
 function searchAPI(title, author) {
-    // Définition du nombre de résultats maximum attendu
+    // Définition du nombre de résultats maximum attendus
     const startIndex = 0;
     const maxResults = 20;
 
@@ -84,7 +84,68 @@ function formatText(inputText) {
     return formattedText;
 }
 
+// Fonction pour afficher les résultats de recherche
+function displayResults(books) {
+    const resultsDiv = document.getElementById('bookResults');
+    resultsDiv.innerHTML = '';
 
+    if (books && books.length > 0) {
+        books.forEach(book => {
+            // Définition des valeurs récupérées
+            const numberOfBooks = books.length;
+            const id = book.id;
+            const title = book.volumeInfo.title;
+            const authors = book.volumeInfo.authors;
+            const description = book.volumeInfo.description || 'Aucune description disponible';
+            const firstAuthor = authors ? authors[0].split(',')[0] : 'Auteur inconnu';
+            const thumbnailUrl = book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail || 'img/unavailable.png';
+
+            // Manipulation de la chaîne de caractères "description" pour la mettre en forme et la tronquer
+            const formattedDescription = formatText(description);
+            shortdescription = truncateText(formattedDescription, 200);
+
+            // Préparation de l'alerte de succès
+            const successMessage = document.getElementById('alert');
+            successMessage.setAttribute("class", "success");
+            successMessage.textContent = "RESULTATS DE RECHERCHE : " + numberOfBooks + " livres correspondent à votre recherche";
+
+            const encodedTitle = encodeURIComponent(title);
+            const encodedFirstAuthor = encodeURIComponent(firstAuthor);
+            const encodedShortDescription = encodeURIComponent(shortdescription);
+            const encodedThumbnailUrl = encodeURIComponent(thumbnailUrl);
+
+            // Création de l'affichage de toutes les occurrences de résultat
+            const articleElement = document.createElement('div');
+            articleElement.classList.add('bookbox');
+            articleElement.innerHTML = `
+                <div>
+                <i class="fa-regular fa-bookmark" id="${id}" onclick="saveBook('${id}', '${encodedTitle}', '${encodedFirstAuthor}', '${encodedShortDescription}', '${encodedThumbnailUrl}')"></i>
+                </div>
+                <p class="booktitle">Titre : ${title}</p>
+                <p class="bookid">Id : ${id}</p>
+                <p class="bookauthor">Auteur: ${firstAuthor}</p>
+                <p class="bookdescription">Description : ${shortdescription}</p>
+                <div class="bookcover">     
+                    <img src="${thumbnailUrl}" alt="Thumbnail">
+                </div>
+                <p class="error" id="alert_${id}"></p>
+            `;
+            resultsDiv.appendChild(articleElement);
+
+            // Définition de l'icône favori
+            const storedBookJSON = sessionStorage.getItem("APIGB" + id);
+            if (storedBookJSON) {
+                const changeIcon = document.getElementById(id);
+                changeIcon.setAttribute("class", "fa-solid fa-bookmark");
+            }
+        });
+    } else {
+        // Préparation de l'alerte d'alerte d'échec
+        const errorMessage = document.getElementById('alert');
+        errorMessage.setAttribute("class", "error");
+        errorMessage.textContent = "Aucun livre trouvé";
+    }
+}
 
 
 
