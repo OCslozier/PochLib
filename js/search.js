@@ -148,4 +148,15 @@ function displayResults(books) {
 }
 
 
+function cancelSearch() {
+    // Annulation de la recherche
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("cancel").onclick = function () {
+            window.location.reload();
+        };
+    });
+}
+
+cancelSearch();
+
 
