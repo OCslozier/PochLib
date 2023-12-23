@@ -18,7 +18,7 @@ function displayForm() {
                 <label for="author">Auteur:</label>
                 <input type="text" id="author" placeholder="Ex. :  Stendhal">
                 <br>
-                <div class="button-container_2" id="bouton3">
+                <div class="button-container_2">
                     <button class="button-green" id="submit" type="button">Rechercher</button>
                     <button class="button-red" id="cancel" type="button">Annuler</button>
                 </div>
@@ -32,18 +32,17 @@ function displayForm() {
 
 function newSeparator() {
     let newSeparator = `
-    <div id="separator" class="separator-container">
-		<div class="line left-line"></div>
-		<div class="center-content">
-		  <img src="img/logo_min.png" alt="Image centrée">
-		</div>
-		<div class="line right-line"></div>
-	  </div>    
+        <div id="separator" class="separator-container">
+            <div class="line left-line"></div>
+            <div class="center-content">
+                <img src="img/logo_min.png" alt="Logo">
+            </div>
+            <div class="line right-line"></div>
+        </div>    
     `
     let sepElement = document.querySelector('html div#myBooks hr');
     sepElement.insertAdjacentHTML('afterend', newSeparator);
     sepElement.remove()
-
 }
 
 function HideAndDisplay() {
@@ -62,7 +61,7 @@ HideAndDisplay();
 sessionStorageDisplay();
 
 // Recherche et affichage des éléments présents dans sessionStorage
-function sessionStorageDisplay() {
+function sessionStorageDisplay() { 
     if (sessionStorage.length > 0) {
         // Parcourir les clés du sessionStorage
         let hrElementStorageResult = document.getElementById("pochlist");

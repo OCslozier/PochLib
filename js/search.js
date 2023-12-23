@@ -148,17 +148,16 @@ function displayResults(books) {
     }
 }
 
-
-function cancelSearch() {
 // Annulation de la recherche
-document.addEventListener("DOMContentLoaded", function () {
+function cancelSearch() {
+    document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("cancel").onclick = function () {
-            window.location.reload();     
-    }   
-});
+            window.location.reload();
+        }
+    });
 }
 
-cancelSearch()
+cancelSearch();
 
 function saveBook(id, title, firstAuthor, shortDescription, thumbnailUrl) {
     // Vérifier si le livre est déjà enregistré dans sessionStorage
@@ -196,3 +195,21 @@ function saveBook(id, title, firstAuthor, shortDescription, thumbnailUrl) {
         sessionStorageDisplay();
     }
 }
+
+function eraseBook() {
+    document.getElementById('storageResults').addEventListener('click', function (event) {
+        if (event.target.classList.contains('eraseBook')) {
+            const bookId = event.target.dataset.bookid;
+            sessionStorage.removeItem("APIGB" + bookId);
+
+            const changeIcon = document.getElementById(bookId);
+            if (changeIcon) {
+                changeIcon.setAttribute("class", "fa-regular fa-bookmark");
+            }
+
+            sessionStorageDisplay();
+        }
+    })
+}
+
+eraseBook();
