@@ -1,4 +1,3 @@
-@charset "UTF-8";
 body {
   font-family: "Roboto", sans-serif;
   padding-top: 10px;
@@ -35,6 +34,8 @@ body {
 h2 {
   text-align: center;
   font-size: 20px;
+  margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 hr {
@@ -131,6 +132,7 @@ input {
   border: solid 1px;
   border-radius: 3px;
   padding: 5px 30px;
+  font-size: 12px;
 }
 
 .fa-bookmark {
@@ -156,11 +158,11 @@ input {
 .bookcover {
   display: flex;
   justify-content: center;
-  margin: 15px 0²;
+  margin: 15px;
 }
 
 .bookcover img {
-  max-height: 250px;
+  max-height: 150px;
   -o-object-fit: contain;
      object-fit: contain;
 }
@@ -186,6 +188,9 @@ input {
   .bookResults {
     grid-template-columns: repeat(2, 1fr);
   }
+  .bookbox {
+    font-size: 16px;
+  }
 }
 @media all and (min-width: 2000px) {
   button {
@@ -207,6 +212,9 @@ input {
   }
   .bookResults {
     grid-template-columns: repeat(4, 1fr);
+  }
+  .bookbox {
+    font-size: 16px;
   }
 }
 .separator-container {

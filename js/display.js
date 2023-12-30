@@ -1,3 +1,4 @@
+// Fonction d'affichage du bouton d'ajout de livre
 function displayAddButton() {
     let hideButton = `
         <div id="hideButton" class="button-container">
@@ -8,6 +9,7 @@ function displayAddButton() {
     h2Element.insertAdjacentHTML('afterend', hideButton);
 }
 
+// Fonction d'affichage du formulaire de recherche
 function displayForm() {
     let form = `
         <div id="search" class="hide">
@@ -30,6 +32,7 @@ function displayForm() {
     formElement.insertAdjacentHTML('afterend', form);
 }
 
+// Fonction d'affichage du séparateur personnalisé + logo
 function newSeparator() {
     let newSeparator = `
         <div id="separator" class="separator-container">
@@ -45,7 +48,8 @@ function newSeparator() {
     sepElement.remove()
 }
 
-function HideAndDisplay() {
+// Fonction pour afficher le formualire au clic sur le bouton ajout de livre
+function hideAndDisplay() {
     let hideButton = document.getElementById("addBouton");
     hideButton.addEventListener("click", function () {
         let hideForm = document.getElementById("search");
@@ -57,13 +61,13 @@ function HideAndDisplay() {
 displayAddButton();
 displayForm();
 newSeparator()
-HideAndDisplay();
+hideAndDisplay();
 sessionStorageDisplay();
 
 // Recherche et affichage des éléments présents dans sessionStorage
 function sessionStorageDisplay() { 
     if (sessionStorage.length > 0) {
-        // Parcourir les clés du sessionStorage
+        
         let hrElementStorageResult = document.getElementById("pochlist");
         let hrStorageDiv = document.getElementById("hrStorageResults");
         let h2ElementStorageResult = document.getElementById("hrStorageResults");
@@ -73,6 +77,7 @@ function sessionStorageDisplay() {
             hrElementStorageResult = document.getElementById("pochlist");
             let hrStorageDiv = document.createElement("hr");
             hrStorageDiv.id = "hrStorageResults";
+            hrStorageDiv.className = "hide"
             hrElementStorageResult.parentNode.insertBefore(hrStorageDiv, hrElementStorageResult.nextSibling);
         }
 
@@ -104,7 +109,7 @@ function sessionStorageDisplay() {
                         </div>
                         <p class="booktitle">Titre : ${decodedValue.title}</p>
                         <p class="bookid">Id : ${decodedValue.id}</p>
-                        <p class="bookauthor">Auteur: ${decodedValue.firstAuthor}</p>
+                        <p class="bookauthor">Auteur: ${decodedValue.authors}</p>
                         <p class="bookdescription">Description : ${decodedValue.shortDescription}</p>
                         <div class="bookcover">     
                             <img src="${decodedValue.thumbnailUrl}" alt="Thumbnail">

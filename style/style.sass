@@ -4,10 +4,10 @@ $color_hr: #c8c8c8
 $color_error: #f02b01
 $color_success: #1AAB19
 $background-color_title: #eff0f4
-$background-color_2: #469388
-$background-color_3: #318b7d
-$background-color_4: #df5a4b
-$background-color_5: #973025
+$background-button-green: #469388
+$background-button-green-hover: #318b7d
+$background-button-red: #df5a4b
+$background-button-red-hover: #973025
 $color_btntext: #fff
 @mixin bookmark
   height: 60px
@@ -48,6 +48,8 @@ body
 h2
   text-align: center
   font-size: 20px
+  margin-bottom: 40px
+  margin-top: 40px
 
 hr
   margin-top: 20px
@@ -76,20 +78,20 @@ button
   border-radius: 5px
 
   &.button-green
-    background-color: $background-color_2
+    background-color: $background-button-green
     margin-right: 5px
     color: $color_btntext
 
     &:hover
-      background-color: $background-color_3
+      background-color: $background-button-green-hover
 
   &.button-red
-    background-color: $background-color_4
+    background-color: $background-button-red
     margin-left: 5px
     color: $color_btntext
 
     &:hover
-      background-color: $background-color_5
+      background-color: $background-button-red-hover
 
 form
   margin: auto
@@ -132,9 +134,10 @@ input
     border: solid 1px
     border-radius: 3px
     padding: 5px 30px
+    font-size: 12px
 
 .fa-bookmark
-    color: $background-color_2
+    color: $background-button-green
     @include bookmark
 
 .fa-trash
@@ -144,10 +147,10 @@ input
 .bookcover
     display: flex
     justify-content: center
-    margin: 15px 0²
+    margin: 15px
 
 .bookcover img
-    max-height: 250px
+    max-height: 150px
     object-fit: contain
 
 @media all and (min-width: 751px) and (max-width: 1999px)
@@ -171,7 +174,10 @@ input
 
   .bookResults
     grid-template-columns: repeat(2, 1fr)
-    
+  
+  .bookbox
+    font-size: 16px
+
 @media all and (min-width: 2000px)
 
   button
@@ -193,6 +199,9 @@ input
 
   .bookResults
       grid-template-columns: repeat(4, 1fr)
+  
+  .bookbox
+    font-size: 16px
 
 .separator-container 
   display: flex
