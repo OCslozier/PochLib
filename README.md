@@ -12,7 +12,7 @@ Poch'Lib est une application qui permet à l'utilisateur de rechercher des séle
 ## Mode opératoire d'installation
 
 - Exécuter Git Bash et cloner le projet git
-- Url du projet à cloner : https://github.com/OCslozier/pochlist.git
+- Url du projet à cloner : https://github.com/OCslozier/PochLib.git
 - Ouvrir le projet cloné dans Visual Studio Code
 
 ## Démarrage de l'application
