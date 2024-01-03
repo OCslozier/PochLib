@@ -88,7 +88,7 @@ function formSubmit() {
   function displayResults(books) {
     const resultsDiv = document.getElementById('bookResults');
     resultsDiv.innerHTML = '';
-  
+    
     if (books && books.length > 0) {
       books.forEach(book => {
         // Définition des valeurs récupérées
@@ -97,7 +97,7 @@ function formSubmit() {
         const authors = book.volumeInfo.authors[0] || 'Auteur inconnu';
         const description = book.volumeInfo.description || 'Aucune description disponible';
         const thumbnailUrl = book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail || 'img/unavailable.png';
-  
+          
         // Manipulation de la chaîne de caractères "description" pour la mettre en forme et la tronquer
         const formattedDescription = formatText(description);
         shortDescription = truncateText(formattedDescription, 200);
@@ -132,7 +132,7 @@ function formSubmit() {
         });
   
         // Définition de l'icône favori
-        const storedBookJSON = sessionStorage.getItem("APIGB" + id);
+        const storedBookJSON = sessionStorage.getItem(SESSIONSTORAGEPREFIXKEY + id);
         if (storedBookJSON) {
           const changeIcon = document.getElementById(id);
           changeIcon.setAttribute("class", "fa-solid fa-bookmark");
@@ -160,7 +160,7 @@ function formSubmit() {
   // Fonction pour sauvegarder le livre en sessionStorage
   function saveBook(id, title, authors, shortDescription, thumbnailUrl) {
     // Vérifier si le livre est déjà enregistré dans sessionStorage
-    const storedBookJSON = sessionStorage.getItem("APIGB" + id);
+    const storedBookJSON = sessionStorage.getItem(SESSIONSTORAGEPREFIXKEY + id);
   
     if (storedBookJSON) {
       // Le livre est déjà dans sessionStorage, on affiche une alerte
@@ -185,7 +185,7 @@ function formSubmit() {
       const bookInfoJSON = JSON.stringify(bookInfo);
   
       // Stockage du livre et de ces infos en sessionStorage (clé = ("APIGB"+id), les infos en Json)
-      sessionStorage.setItem("APIGB" + id, bookInfoJSON);
+      sessionStorage.setItem(SESSIONSTORAGEPREFIXKEY + id, bookInfoJSON);
   
       // Je modifie l'icône favori de mon élément pour indiquer que le livre est enregistré
       const changeIcon = document.getElementById(id);
@@ -202,7 +202,7 @@ function formSubmit() {
       if (event.target.classList.contains('eraseBook')) {
         const bookId = event.target.dataset.bookid;
         // Suppression de l'élément du session storage
-        sessionStorage.removeItem("APIGB" + bookId);
+        sessionStorage.removeItem(SESSIONSTORAGEPREFIXKEY + bookId);
   
         // Modification de l'icône de l'élément s'il est présent dans les résultats de recherche et en cas de nouvelle recherche
         const changeIcon = document.getElementById(bookId);

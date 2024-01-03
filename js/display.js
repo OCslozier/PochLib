@@ -48,7 +48,7 @@ function newSeparator() {
     sepElement.remove()
 }
 
-// Fonction pour afficher le formualire au clic sur le bouton ajout de livre
+// Fonction pour afficher le formulaire au clic sur le bouton ajout de livre
 function hideAndDisplay() {
     let hideButton = document.getElementById("addBouton");
     hideButton.addEventListener("click", function () {
@@ -66,6 +66,9 @@ sessionStorageDisplay();
 
 // Recherche et affichage des éléments présents dans sessionStorage
 function sessionStorageDisplay() { 
+
+    window.SESSIONSTORAGEPREFIXKEY = "APIGB"
+    
     if (sessionStorage.length > 0) {
         
         let hrElementStorageResult = document.getElementById("pochlist");
@@ -95,7 +98,7 @@ function sessionStorageDisplay() {
             const key = sessionStorage.key(i);
 
             // J'exclue les clés qui ne commencent pas par "APIGB"
-            if (key.startsWith("APIGB")) {
+            if (key.startsWith(SESSIONSTORAGEPREFIXKEY)) {
                 const storedValue = sessionStorage.getItem(key);
 
                 try {
